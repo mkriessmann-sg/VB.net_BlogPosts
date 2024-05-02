@@ -91,12 +91,32 @@
     <Import Include="System.Web.UI.HtmlControls" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\CreateBlogPost.aspx" />
-    <Content Include="Views\EditBlogPost.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="Views\Home\CreateBlogPost.aspx" />
+    <Content Include="Views\Home\MainView.aspx" />
     <Content Include="Web.config" />
-    <Content Include="Views\MainView.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Global.asax.vb">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home\MainView.aspx.designer.vb">
+      <DependentUpon>MainView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home\MainView.aspx.vb">
+      <DependentUpon>MainView.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Views\Shared\BlogSite.Master.designer.vb">
+      <DependentUpon>BlogSite.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\BlogSite.Master.vb">
+      <DependentUpon>BlogSite.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Shared\SiteMaster.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Controller\HomeController.vb" />
     <Compile Include="DatabaseHandler\DatabaseHandler.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -119,24 +139,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Views\EditBlogPost.aspx.designer.vb">
-      <DependentUpon>EditBlogPost.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\EditBlogPost.aspx.vb">
-      <DependentUpon>EditBlogPost.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
-    <Compile Include="Views\MainView.aspx.designer.vb">
-      <DependentUpon>MainView.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\MainView.aspx.vb">
-      <DependentUpon>MainView.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
-    <Compile Include="Views\CreateBlogPost.aspx.designer.vb">
+    <Compile Include="Views\Home\CreateBlogPost.aspx.designer.vb">
       <DependentUpon>CreateBlogPost.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\CreateBlogPost.aspx.vb">
+    <Compile Include="Views\Home\CreateBlogPost.aspx.vb">
       <DependentUpon>CreateBlogPost.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
@@ -161,6 +167,7 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="packages.config" />
+    <Content Include="Views\Shared\BlogSite.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

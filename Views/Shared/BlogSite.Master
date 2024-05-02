@@ -1,0 +1,22 @@
+﻿<%@ Master Language="VB" AutoEventWireup="false" CodeBehind="BlogSite.master.vb" Inherits="VB.net_BlogPosts.BlogSite" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+   
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <div class="navbar">
+            <a href="BlogPosts.aspx">Blog Posts</a>
+            <a href="CreateBlogPost.aspx">Create Blog Post</a>
+        </div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolderBlog" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+</body>
+</html>
