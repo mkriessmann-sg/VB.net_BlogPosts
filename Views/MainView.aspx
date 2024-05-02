@@ -1,4 +1,4 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="WebForm1.aspx.vb" Inherits="VB.net_BlogPosts.WebForm1" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="MainView.aspx.vb" Inherits="VB.net_BlogPosts.WebForm1" %>
 
 <!DOCTYPE html>
 
@@ -7,7 +7,7 @@
     <title></title>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="MainView" runat="server">
         <div>
             <h1>Test page</h1>
         </div>
