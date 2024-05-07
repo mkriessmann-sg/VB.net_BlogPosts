@@ -1,19 +1,24 @@
-﻿<%@ Master Language="VB" AutoEventWireup="false" CodeBehind="BlogSite.master.vb" Inherits="VB.net_BlogPosts.BlogSite" %>
-
+﻿﻿<%@ Master Language="VB" AutoEventWireup="false" CodeBehind="BlogSite.master.vb" Inherits="VB.net_BlogPosts.BlogSite" Imports ="VB.net_BlogPosts.DatabaseHandling.DatabaseHandler" %>
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head runat="server">
     <title></title>
-   
+   <%databasehanderl %>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link href="../../Styles/Default.css" rel="stylesheet" />
+
 </head>
 <body>
     <form id="form1" runat="server">
         <div>
-            <div class="navbar">
-            <a href="BlogPosts.aspx">Blog Posts</a>
-            <a href="CreateBlogPost.aspx">Create Blog Post</a>
-        </div>
+            <nav> 
+                <ul>
+                    <li><a href ="MainView.aspx">Blog Posts</a></li>
+                    <li><a href ="AddBlogPost.aspx">Create Blog Post</a></li>
+                </ul>
+            </nav>
             <asp:ContentPlaceHolder ID="ContentPlaceHolderBlog" runat="server">
             </asp:ContentPlaceHolder>
         </div>

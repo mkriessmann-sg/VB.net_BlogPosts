@@ -1,4 +1,7 @@
-﻿Class SiteMaster
+﻿Imports VB.net_BlogPosts.DatabaseHandling.DatabaseHandler
+Imports VB.net_BlogPosts.DatabaseHandling.BlogPost
+
+Class SiteMaster
     Inherits System.Web.UI.Page
 
 

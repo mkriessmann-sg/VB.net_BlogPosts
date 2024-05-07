@@ -92,19 +92,36 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="Views\Home\CreateBlogPost.aspx" />
+    <Content Include="Styles\Default.css" />
+    <Content Include="Views\Home\AddBlogPost.aspx" />
     <Content Include="Views\Home\MainView.aspx" />
+    <Content Include="Views\Home\Test Page.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DatabaseHandler\BlogPost.vb" />
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home\AddBlogPost.aspx.designer.vb">
+      <DependentUpon>AddBlogPost.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home\AddBlogPost.aspx.vb">
+      <DependentUpon>AddBlogPost.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Views\Home\MainView.aspx.designer.vb">
       <DependentUpon>MainView.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Home\MainView.aspx.vb">
       <DependentUpon>MainView.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Views\Home\Test Page.aspx.designer.vb">
+      <DependentUpon>Test Page.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home\Test Page.aspx.vb">
+      <DependentUpon>Test Page.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Views\Shared\BlogSite.Master.designer.vb">
@@ -138,13 +155,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="Views\Home\CreateBlogPost.aspx.designer.vb">
-      <DependentUpon>CreateBlogPost.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Home\CreateBlogPost.aspx.vb">
-      <DependentUpon>CreateBlogPost.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
