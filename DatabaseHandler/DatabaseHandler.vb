@@ -67,7 +67,7 @@ Namespace DatabaseHandling
                             Dim post As New BlogPost()
                             post.Id = reader.GetInt32(0)
                             post.Title = Convert.ToString(reader.GetString(1))
-                            'post.Content = Convert.ToString(reader.GetString(2))
+                            post.Content = Convert.ToString(reader.GetString(2))
                             'post.PostDate = Convert.ToDateTime(reader.GetDateTime(3))
 
                             posts.Add(post)
