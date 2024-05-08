@@ -52,3 +52,9 @@ footer {
     padding: 20px;
     margin: 5px auto 0 auto;
 }
+hr.solid {
+    border-top: 3px solid #bbb;
+    text-align: center;
+    width: 80%;
+}
+
