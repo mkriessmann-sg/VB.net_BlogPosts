@@ -42,9 +42,7 @@
 
 </script>
 
-
-
-    <% Dim posts As New List(Of Object)() %> 
+   
 
     <h1>Test Page for all kinds of stuff</h1>
 
@@ -60,7 +58,7 @@
     
     <asp:TextBox ID="ContentBox" runat="server" placeholder ="Content" />
 
-    <asp:Button ID="btnSubmit" runat="server" Text="Submit" OnClick="Add_Post_Button" />
+    <asp:Button ID="btnSubmit1" runat="server" Text="Submit" OnClick="Add_Post_Button" />
     
         </div>
 
@@ -72,6 +70,8 @@
         <p style="text-align: center ">
             <%= blog.Content %>
         </p>
+        <label><%= blog.Id%></label>
+        
     </div>
     <asp:Button runat="server" Text="Delete" CommandArgument=' <%= blog.Id %>' OnCommand="Delete_Post_Button" />
     <div><hr class="solid"></div>

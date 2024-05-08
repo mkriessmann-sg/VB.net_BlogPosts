@@ -32,11 +32,11 @@ Partial Public Class Test_Page
     Protected WithEvents ContentBox As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''btnSubmit control.
+    '''btnSubmit1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnSubmit As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents btnSubmit1 As Global.System.Web.UI.WebControls.Button
 End Class

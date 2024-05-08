@@ -123,11 +123,11 @@ Namespace DatabaseHandling
         End Sub
 
         Public Sub DeletePost(ByVal postId As Integer)
-            Dim sqlCommand As String = "DELETE FROM BlogPosts WHERE id = @id"
+            Dim sqlCommand As String = "DELETE FROM BlogPosts WHERE id = @id;"
 
             Using conn As New NpgsqlConnection(connString)
                 Using command As New NpgsqlCommand(SqlCommand, conn)
-                    command.Parameters.AddWithValue("@PostID", postId)
+                    command.Parameters.AddWithValue("@id", postId)
 
                     conn.Open()
                     command.ExecuteNonQuery()
@@ -155,6 +155,34 @@ Namespace DatabaseHandling
                 End Using
             End Using
             Return id
+        End Function
+
+        Public Function GetPostByID(ByVal postid As Integer) As BlogPost
+            Dim post As New BlogPost()
+            Using conn As New NpgsqlConnection(connString)
+                Using command As New NpgsqlCommand("SELECT id, title, content FROM BlogPosts WHERE id = @id;", conn)
+
+                    Try
+                        conn.Open()
+                        'Console.WriteLine("Connected to PostgreSQL database!")
+                    Catch ex As Exception
+                        'Console.WriteLine("Failed to connect to PostgreSQL database: " & ex.Message)
+                    End Try
+
+                    'TODO: get all blog posts and return list of blog posts
+                    Using reader As NpgsqlDataReader = command.ExecuteReader()
+                        While reader.Read()
+
+                            post.Id = reader.GetInt32(0)
+                            post.Title = Convert.ToString(reader.GetString(1))
+                            post.Content = Convert.ToString(reader.GetString(2))
+                            'post.PostDate = Convert.ToDateTime(reader.GetDateTime(3))
+                        End While
+
+                    End Using
+                End Using
+            End Using
+            Return post
         End Function
 
 
