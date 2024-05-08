@@ -104,7 +104,7 @@ Namespace DatabaseHandling
 
             Using conn As New NpgsqlConnection(connString)
                 'error prone, replace with better string concatenation
-                Dim sqlCommand As String = "INSERT INTO BlogPosts (id, title, content, postdate)  VALUES (" + blogpost.Id + ", '" + blogpost.Title + "', '" + blogpost.Content + "'," + Convert.ToString(blogpost.PostDate) + ";"
+                Dim sqlCommand As String = "INSERT INTO BlogPosts (id, title, content)  VALUES (" & blogpost.Id & ", '" & blogpost.Title & "', '" & blogpost.Content & "');"
                 Using command As New NpgsqlCommand(sqlCommand, conn)
 
                     Try
@@ -134,6 +134,28 @@ Namespace DatabaseHandling
                 End Using
             End Using
         End Sub
+
+        Public Function GetHighestID() As Integer
+            Dim id As Integer
+            Using conn As New NpgsqlConnection(connString)
+                Using command As New NpgsqlCommand("SELECT MAX(id) FROM BlogPosts", conn)
+                    Try
+                        conn.Open()
+                        'Console.WriteLine("Connected to PostgreSQL database!")
+                    Catch ex As Exception
+                        'Console.WriteLine("Failed to connect to PostgreSQL database: " & ex.Message)
+                    End Try
+                    'TODO: get all blog posts and return list of blog posts
+                    Using reader As NpgsqlDataReader = command.ExecuteReader()
+                        While reader.Read()
+                            id = reader.GetInt32(0)
+                        End While
+
+                    End Using
+                End Using
+            End Using
+            Return id
+        End Function
 
 
     End Class

@@ -7,29 +7,41 @@
     <%@ Import Namespace="DatabaseHandling"%> 
 
 
-    <% Dim blogList As List(Of VB.net_BlogPosts.DatabaseHandling.BlogPost) = New List(Of VB.net_BlogPosts.DatabaseHandling.BlogPost)
-
-
-        'Dim blog1 = New VB.net_BlogPosts.DatabaseHandling.BlogPost()
-        'blog1.Id = 1
-        'blog1.Title = "Title1"
-        'blog1.Content = "Content 1"
-
-        'Dim blog2 = New VB.net_BlogPosts.DatabaseHandling.BlogPost()
-        'blog2.Id = 2
-        'blog2.Title = "Title2"
-        'blog2.Content = "Content 2"
-        'blogList.Add(blog2)
-        'blogList.Add(blog1)
-
+    <% 
+        Dim blogList As List(Of VB.net_BlogPosts.DatabaseHandling.BlogPost) = New List(Of VB.net_BlogPosts.DatabaseHandling.BlogPost)
 
         Dim DbHandler As VB.net_BlogPosts.DatabaseHandling.DatabaseHandler = New VB.net_BlogPosts.DatabaseHandling.DatabaseHandler
 
         blogList = DbHandler.GetBlogPosts()
-        DbHandler.TestConnection()
-
 
         %>
+
+    <script runat="server">
+        Protected Sub Add_Post_Button(ByVal sender As Object, ByVal e As EventArgs)
+            ' Server-side code to handle button click event
+            Dim blogpost As VB.net_BlogPosts.DatabaseHandling.BlogPost = New VB.net_BlogPosts.DatabaseHandling.BlogPost
+            blogpost.Title = TitleBox.Text
+            blogpost.Content = ContentBox.Text
+            blogpost.PostDate = DateTime.Now
+
+            Dim DbHandler As VB.net_BlogPosts.DatabaseHandling.DatabaseHandler = New VB.net_BlogPosts.DatabaseHandling.DatabaseHandler
+            blogpost.Id = DbHandler.GetHighestID() + 1
+            DbHandler.AddPost(blogpost)
+
+        End Sub
+
+        Protected Sub Delete_Post_Button(ByVal sender As Object, ByVal e As CommandEventArgs)
+            ' Server-side code to handle button click event
+            Dim btn As Button = sender
+            Dim id As Integer = Convert.ToInt32(e.CommandArgument)
+            Dim DbHandler As VB.net_BlogPosts.DatabaseHandling.DatabaseHandler = New VB.net_BlogPosts.DatabaseHandling.DatabaseHandler
+            DbHandler.DeletePost(id)
+
+        End Sub
+
+
+</script>
+
 
 
     <% Dim posts As New List(Of Object)() %> 
@@ -42,29 +54,31 @@
 </div>
     <div style = "text-align: center ">
     <label >Title</label>
-    <input placeholder ="Title" />
+    
+    <asp:TextBox ID="TitleBox" runat="server" placeholder ="Title" />
     <label>Content</label>
-    <input placeholder ="Content"   />
-    <button id="OkButton" onclick ="Add_Post" >Ok</button>
+    
+    <asp:TextBox ID="ContentBox" runat="server" placeholder ="Content" />
+
+    <asp:Button ID="btnSubmit" runat="server" Text="Submit" OnClick="Add_Post_Button" />
+    
         </div>
 
-
-    <%For Each blog As VB.net_BlogPosts.DatabaseHandling.BlogPost In blogList%>  
+ <% For Each blog As VB.net_BlogPosts.DatabaseHandling.BlogPost In blogList %>
     <div>
-        <h1 style = "text-align: center "> <%= blog.Title%> </h1>
-        </div>
-    <div> 
-        <p style = "text-align: center " > 
-            <%= blog.Content%>
+        <h1 style="text-align: center "><%= blog.Title %></h1>
+    </div>
+    <div>
+        <p style="text-align: center ">
+            <%= blog.Content %>
         </p>
     </div>
-    <div> <hr class="solid"> </div>
-    <a>Edit</a>
-    <a>delete</a>
-   <%       Next %>
+    <asp:Button runat="server" Text="Delete" CommandArgument=' <%= blog.Id %>' OnCommand="Delete_Post_Button" />
+    <div><hr class="solid"></div>
+<% Next %>
   
 
-
+    
 
 </asp:Content>
 
