@@ -13,6 +13,7 @@ Namespace DatabaseHandling
             Dim flag As Boolean
 
             Using conn As New NpgsqlConnection(connString)
+                Dim DBlist As List(Of String) = New List(Of String)
                 Try
                     conn.Open()
                     Console.WriteLine("Connected to PostgreSQL database!")
@@ -22,10 +23,27 @@ Namespace DatabaseHandling
                     flag = False
                 End Try
 
-                Console.WriteLine(flag)
+                If flag Then
 
 
+                End If
+
+                Using command As New NpgsqlCommand("SELECT table_name FROM information_schema.tables WHERE table_schema='public' AND table_type='BASE TABLE';", conn)
+
+                    Using reader As NpgsqlDataReader = command.ExecuteReader()
+                        While reader.Read()
+
+                            Dim listElement As String = reader.GetString(0)
+                            DBlist.Add(listElement)
+                        End While
+
+                    End Using
+
+
+
+                End Using
             End Using
+
         End Sub
 
 
@@ -34,7 +52,7 @@ Namespace DatabaseHandling
 
             Dim posts As New List(Of BlogPost)()
             Using conn As New NpgsqlConnection(connString)
-                Using command As New NpgsqlCommand("SELECT ID, Title, Content, DateCreated FROM BlogPosts", conn)
+                Using command As New NpgsqlCommand("SELECT id, title, content FROM BlogPosts", conn)
 
                     Try
                         conn.Open()
@@ -48,9 +66,9 @@ Namespace DatabaseHandling
                         While reader.Read()
                             Dim post As New BlogPost()
                             post.Id = reader.GetInt32(0)
-                            post.Title = reader.GetString(1)
-                            post.Content = reader.GetString(2)
-                            post.PostDate = reader.GetDateTime(3)
+                            post.Title = Convert.ToString(reader.GetString(1))
+                            'post.Content = Convert.ToString(reader.GetString(2))
+                            'post.PostDate = Convert.ToDateTime(reader.GetDateTime(3))
 
                             posts.Add(post)
                         End While
@@ -75,7 +93,6 @@ Namespace DatabaseHandling
                         'Console.WriteLine("Failed to connect to PostgreSQL database: " & ex.Message)
                     End Try
                     command.ExecuteNonQuery()
-
                     'TODO: get all blog posts and return list of blog posts
                 End Using
 
@@ -87,7 +104,7 @@ Namespace DatabaseHandling
 
             Using conn As New NpgsqlConnection(connString)
                 'error prone, replace with better string concatenation
-                Dim sqlCommand As String = "INSERT INTO BlogPosts (id, title, content, date)  VALUES (" + blogpost.Id + ", '" + blogpost.Title + "', '" + blogpost.Content + "'," + Convert.ToString(blogpost.PostDate) + ";"
+                Dim sqlCommand As String = "INSERT INTO BlogPosts (id, title, content, postdate)  VALUES (" + blogpost.Id + ", '" + blogpost.Title + "', '" + blogpost.Content + "'," + Convert.ToString(blogpost.PostDate) + ";"
                 Using command As New NpgsqlCommand(sqlCommand, conn)
 
                     Try

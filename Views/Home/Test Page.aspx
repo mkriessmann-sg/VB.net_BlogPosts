@@ -10,22 +10,22 @@
     <% Dim blogList As List(Of VB.net_BlogPosts.DatabaseHandling.BlogPost) = New List(Of VB.net_BlogPosts.DatabaseHandling.BlogPost)
 
 
-        Dim blog1 = New VB.net_BlogPosts.DatabaseHandling.BlogPost()
-        blog1.Id = 1
-        blog1.Title = "Title1"
-        blog1.Content = "Content 1"
+        'Dim blog1 = New VB.net_BlogPosts.DatabaseHandling.BlogPost()
+        'blog1.Id = 1
+        'blog1.Title = "Title1"
+        'blog1.Content = "Content 1"
 
-        Dim blog2 = New VB.net_BlogPosts.DatabaseHandling.BlogPost()
-        blog2.Id = 2
-        blog2.Title = "Title2"
-        blog2.Content = "Content 2"
-        blogList.Add(blog2)
-        blogList.Add(blog1)
+        'Dim blog2 = New VB.net_BlogPosts.DatabaseHandling.BlogPost()
+        'blog2.Id = 2
+        'blog2.Title = "Title2"
+        'blog2.Content = "Content 2"
+        'blogList.Add(blog2)
+        'blogList.Add(blog1)
 
 
         Dim DbHandler As VB.net_BlogPosts.DatabaseHandling.DatabaseHandler = New VB.net_BlogPosts.DatabaseHandling.DatabaseHandler
 
-        'blogList = DbHandler.GetBlogPosts
+        blogList = DbHandler.GetBlogPosts()
         DbHandler.TestConnection()
 
 
