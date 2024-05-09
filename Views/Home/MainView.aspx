@@ -2,45 +2,36 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderBlog" runat="server">
 
-
-        <% 
-        Dim blogList As List(Of VB.net_BlogPosts.DatabaseHandling.BlogPost) = New List(Of VB.net_BlogPosts.DatabaseHandling.BlogPost)
-
-        Dim DbHandler As VB.net_BlogPosts.DatabaseHandling.DatabaseHandler = New VB.net_BlogPosts.DatabaseHandling.DatabaseHandler
-
-        blogList = DbHandler.GetBlogPosts()
-
-        %>
-
-    <script runat="server">
-
-        Protected Sub Delete_Post_Button(ByVal sender As Object, ByVal e As CommandEventArgs)
-            ' Server-side code to handle button click event
-            Dim btn As Button = sender
-            Dim id As Integer = Convert.ToInt32(e.CommandArgument)
-            Dim DbHandler As VB.net_BlogPosts.DatabaseHandling.DatabaseHandler = New VB.net_BlogPosts.DatabaseHandling.DatabaseHandler
-            DbHandler.DeletePost(id)
-
-        End Sub
-
-
-</script>
        
     <h1 style = "text-align: center " >Main View</h1>
 
+<asp:GridView ID="GridView1" runat="server" EnableModelValidation="True" Width="999px" style="margin-top: 0px" AutoGenerateColumns ="false">
+    <Columns>   
+        <asp:BoundField DataField ="title" HeaderText ="Title" />
+        <asp:BoundField DataField ="content" HeaderText ="Content" />
+        <asp:TemplateField>
+            <ItemTemplate>
+                <asp:LinkButton ID ="lnkDelete" Text ="Delete" runat ="server" CommandArgument ='<%#Eval("id")%>' OnClick="Delete_Post_Button"></asp:LinkButton>
+            </ItemTemplate>
 
- <% For Each blog As VB.net_BlogPosts.DatabaseHandling.BlogPost In blogList %>
-    <div>
-        <h1 style="text-align: center "><%= blog.Title %></h1>
-    </div>
-    <div>
-        <p style="text-align: center ">
-            <%= blog.Content %>
-        </p>
-    </div>
-    <asp:Button runat="server" Text="Delete" CommandArgument=' <%= blog.Id %>' OnCommand="Delete_Post_Button" />
-    <div><hr class="solid"></div>
-<% Next %>
+            <ItemTemplate>
+                <asp:LinkButton ID ="lnkEdit" Text ="Edit" runat ="server" CommandArgument ='<%#Eval("id")%>' OnClick="Edit_Post_Button"></asp:LinkButton>
+                <asp:LinkButton ID ="lnkDelete" Text ="Delete" runat ="server" CommandArgument ='<%#Eval("id")%>' OnClick="Delete_Post_Button"></asp:LinkButton>
+</ItemTemplate>
+
+        </asp:TemplateField>
+
+
+    </Columns>
+
+</asp:GridView>
+  
+
+
+
+<asp:ObjectDataSource ID="ObjectDataSource1" runat="server"></asp:ObjectDataSource>
+
+<asp:SqlDataSource ID="SqlDataSource1" runat="server"></asp:SqlDataSource>
   
 
 </asp:Content>

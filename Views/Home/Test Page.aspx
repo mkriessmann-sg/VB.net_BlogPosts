@@ -4,45 +4,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderBlog" runat="server">
 
-    <%@ Import Namespace="DatabaseHandling"%> 
-
-
-    <% 
-        Dim blogList As List(Of VB.net_BlogPosts.DatabaseHandling.BlogPost) = New List(Of VB.net_BlogPosts.DatabaseHandling.BlogPost)
-
-        Dim DbHandler As VB.net_BlogPosts.DatabaseHandling.DatabaseHandler = New VB.net_BlogPosts.DatabaseHandling.DatabaseHandler
-
-        blogList = DbHandler.GetBlogPosts()
-
-        %>
-
-    <script runat="server">
-        Protected Sub Add_Post_Button(ByVal sender As Object, ByVal e As EventArgs)
-            ' Server-side code to handle button click event
-            Dim blogpost As VB.net_BlogPosts.DatabaseHandling.BlogPost = New VB.net_BlogPosts.DatabaseHandling.BlogPost
-            blogpost.Title = TitleBox.Text
-            blogpost.Content = ContentBox.Text
-            blogpost.PostDate = DateTime.Now
-
-            Dim DbHandler As VB.net_BlogPosts.DatabaseHandling.DatabaseHandler = New VB.net_BlogPosts.DatabaseHandling.DatabaseHandler
-            blogpost.Id = DbHandler.GetHighestID() + 1
-            DbHandler.AddPost(blogpost)
-
-        End Sub
-
-        Protected Sub Delete_Post_Button(ByVal sender As Object, ByVal e As CommandEventArgs)
-            ' Server-side code to handle button click event
-            Dim btn As Button = sender
-            Dim id As Integer = Convert.ToInt32(e.CommandArgument)
-            Dim DbHandler As VB.net_BlogPosts.DatabaseHandling.DatabaseHandler = New VB.net_BlogPosts.DatabaseHandling.DatabaseHandler
-            DbHandler.DeletePost(id)
-
-        End Sub
-
-
-</script>
-
-   
+    <%@ Import Namespace="DatabaseHandling"%>
 
     <h1>Test Page for all kinds of stuff</h1>
 
@@ -61,21 +23,31 @@
     <asp:Button ID="btnSubmit1" runat="server" Text="Submit" OnClick="Add_Post_Button" />
     
         </div>
+  
 
- <% For Each blog As VB.net_BlogPosts.DatabaseHandling.BlogPost In blogList %>
-    <div>
-        <h1 style="text-align: center "><%= blog.Title %></h1>
-    </div>
-    <div>
-        <p style="text-align: center ">
-            <%= blog.Content %>
-        </p>
-        <label><%= blog.Id%></label>
-        
-    </div>
-    <asp:Button runat="server" Text="Delete" CommandArgument=' <%= blog.Id %>' OnCommand="Delete_Post_Button" />
-    <div><hr class="solid"></div>
-<% Next %>
+   
+    <asp:GridView ID="GridView1" runat="server" EnableModelValidation="True" Width="999px" style="margin-top: 0px" AutoGenerateColumns ="false">
+        <Columns>   
+            <asp:BoundField DataField ="title" HeaderText ="Title" />
+            <asp:BoundField DataField ="content" HeaderText ="Content" />
+            <asp:TemplateField>
+                <ItemTemplate>
+                    
+                </ItemTemplate>
+
+            </asp:TemplateField>
+
+
+        </Columns>
+
+    </asp:GridView>
+  
+
+    
+
+    <asp:ObjectDataSource ID="ObjectDataSource1" runat="server"></asp:ObjectDataSource>
+
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server"></asp:SqlDataSource>
   
 
     

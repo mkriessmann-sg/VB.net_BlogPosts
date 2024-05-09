@@ -83,8 +83,10 @@ Namespace DatabaseHandling
         Public Sub UpdatePost(ByVal blogpost As BlogPost)
 
             Using conn As New NpgsqlConnection(connString)
-                Dim sqlCommand As String = "UPDATE BlogPosts SET title =" + blogpost.Title + ", content=" + blogpost.Content + "WHERE id =" + blogpost.Id + ";"
+                Dim sqlCommand As String = "UPDATE BlogPosts SET title ='" & blogpost.Title & "', content='" & blogpost.Content & "' WHERE id =" & blogpost.Id & ";"
                 Using command As New NpgsqlCommand(sqlCommand, conn)
+                    Dim testString As String = command.CommandText
+
 
                     Try
                         conn.Open()
@@ -94,9 +96,11 @@ Namespace DatabaseHandling
                     End Try
                     command.ExecuteNonQuery()
                     'TODO: get all blog posts and return list of blog posts
+
+
+                End Using
                 End Using
 
-            End Using
 
         End Sub
 
